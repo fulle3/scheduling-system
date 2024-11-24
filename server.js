@@ -1,71 +1,69 @@
+// Import the required modules
 const express = require('express');
-const mysql = require('mysql');
+const path = require('path');
 const bodyParser = require('body-parser');
-const cors = require('cors');
-const app = express();  // Declare app once
+const { createNotification, getNotificationsForUser } = require('./notificationService');
+const connection = require('./db'); // Import the database connection
 
-// Enable CORS
-app.use(cors());
+// Initialize the Express app
+const app = express();
 
-// Middleware
+// Use body-parser middleware to parse JSON requests
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 
-// Database connection
-const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root', // Replace with your MySQL username
-    password: 'Login123', // Replace with your MySQL password
-    database: 'auth' // Replace with your database name
+// Serve static files (e.g., index.html)
+app.use(express.static(path.join(__dirname)));
+
+// Basic route for the root URL
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html')); // Serve the HTML file
 });
 
-db.connect((err) => {
-    if (err) {
-        console.error('Database connection failed:', err.message);
-    } else {
-        console.log('Connected to the MySQL database.');
+// Route to create a notification
+app.post('/notifications', (req, res) => {
+    const { userId, message } = req.body;
+    if (!userId || !message) {
+        return res.status(400).send('User ID and message are required');
     }
-});
-
-// Login endpoint
-app.post('/login', (req, res) => {
-    const { username, password } = req.body;
-
-    const query = 'SELECT * FROM users WHERE username = ? AND password = ?';
-    db.query(query, [username, password], (err, results) => {
+    createNotification(userId, message, (err, result) => {
         if (err) {
-            console.error(err);
-            res.status(500).send('Internal server error');
-        } else if (results.length > 0) {
-            // Valid login
-            res.json({ success: true });
-        } else {
-            // Invalid credentials
-            res.status(401).send('Invalid username or password');
+            return res.status(500).send('Error creating notification');
         }
+        res.status(201).send('Notification created successfully!');
     });
 });
 
-
-
-// API endpoint to save a task
-app.post('/api/tasks', (req, res) => {
-    const { title, description, priority, dueDate, assignee } = req.body;
-
-    const query = `INSERT INTO tasks (title, description, priority, due_date, assignee) VALUES (?, ?, ?, ?, ?)`;
-    db.query(query, [title, description, priority, dueDate, assignee], (err, result) => {
+// Route to get notifications for a specific user
+app.get('/notifications/:userId', (req, res) => {
+    const userId = parseInt(req.params.userId, 10);
+    getNotificationsForUser(userId, (err, results) => {
         if (err) {
-            console.error('Error inserting task:', err);
-            res.status(500).send('Failed to save task');
-        } else {
-            res.status(201).send('Task saved successfully');
+            return res.status(500).send('Error retrieving notifications');
         }
+        res.json(results);
     });
 });
 
+// Route to delete a notification
+app.delete('/notifications/:notificationId', (req, res) => {
+    const notificationId = parseInt(req.params.notificationId, 10);
 
-// Start server
-const port = 3000;
-app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
+    const sql = 'DELETE FROM notifications WHERE notification_id = ?';
+    connection.query(sql, [notificationId], (err, result) => {
+        if (err) {
+            console.error('Error deleting notification:', err);
+            return res.status(500).send('Error deleting notification');
+        }
+
+        if (result.affectedRows === 0) {
+            return res.status(404).send('Notification not found');
+        }
+
+        res.send('Notification deleted successfully');
+    });
+});
+
+// Start the server and listen on port 3000
+app.listen(3000, () => {
+    console.log('Server is running on http://localhost:3000');
 });
