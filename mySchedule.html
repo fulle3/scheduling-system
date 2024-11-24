@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+    <title>My Schedule</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="my-schedule-container">
+    <div class="header-bar"></div>
+   
+    <img class="logo" src="v45_1177.png" alt="IT Help Desk Logo"/>
+
+    <div class="nav-bar">
+        <div class="nav-item">MY SCHEDULE</div>
+        <div class="nav-item">TRADEBOARD</div>
+        <div class="nav-item">TASKS</div>
+        <div class="nav-item">EVERYONE'S SCHEDULE</div>
+    </div>
+    
+    <div class="title">MY SCHEDULE</div>
+
+    <div class="week-date">WEEK DATE</div>
+    
+
+
+    <div class="table-container">
+        <div class="table">
+            <div class="table-row header-row">
+                <div class="table-cell header-cell">Time/Day</div>
+                <div class="table-cell header-cell">Monday</div>
+                <div class="table-cell header-cell">Tuesday</div>
+                <div class="table-cell header-cell">Wednesday</div>
+                <div class="table-cell header-cell">Thursday</div>
+                <div class="table-cell header-cell">Friday</div>
+            </div>
+            <div class="table-row">
+                <div class="table-cell">8:30 - 9:00</div>
+                <div class="table-cell"></div>
+                <div class="table-cell"></div>
+                <div class="table-cell"></div>
+                <div class="table-cell"></div>
+                <div class="table-cell"></div>
+            </div>
+            <div class="table-row">
+                <div class="table-cell">9:00 - 10:00</div>
+                <div class="table-cell"></div>
+                <div class="table-cell"></div>
+                <div class="table-cell"></div>
+                <div class="table-cell"></div>
+                <div class="table-cell"></div>
+            </div>
+            <div class="table-row">
+                <div class="table-cell">10:00 - 11:00</div>
+                <div class="table-cell"></div>
+                <div class="table-cell"></div>
+                <div class="table-cell"></div>
+                <div class="table-cell"></div>
+                <div class="table-cell"></div>
+            </div>
+            <div class="table-row">
+                <div class="table-cell">11:00 - 12:00</div>
+                <div class="table-cell"></div>
+                <div class="table-cell"></div>
+                <div class="table-cell"></div>
+                <div class="table-cell"></div>
+                <div class="table-cell"></div>
+            </div>
+            <div class="table-row">
+                <div class="table-cell">12:00 - 1:00</div>
+                <div class="table-cell"></div>
+                <div class="table-cell"></div>
+                <div class="table-cell"></div>
+                <div class="table-cell"></div>
+                <div class="table-cell"></div>
+            </div>
+            <div class="table-row">
+                <div class="table-cell">1:00 - 2:00</div>
+                <div class="table-cell"></div>
+                <div class="table-cell"></div>
+                <div class="table-cell"></div>
+                <div class="table-cell"></div>
+                <div class="table-cell"></div>
+            </div>
+            <div class="table-row">
+                <div class="table-cell">2:00 - 3:00</div>
+                <div class="table-cell"></div>
+                <div class="table-cell"></div>
+                <div class="table-cell"></div>
+                <div class="table-cell"></div>
+                <div class="table-cell"></div>
+            </div>
+            <div class="table-row">
+                <div class="table-cell">3:00 - 4:30</div>
+                <div class="table-cell"></div>
+                <div class="table-cell"></div>
+                <div class="table-cell"></div>
+                <div class="table-cell"></div>
+                <div class="table-cell"></div>
+            </div>
+        </div>
+
+
+
+        
+    </div>
+</div>
+
+</body>
+</html>
+
+<style>
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Neutraface Text', sans-serif;
+}
+
+.my-schedule-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background: white;
+    
+}
+
+.header-bar {
+    width: 100%;
+    height: 138px;
+    background: #7A0019;
+    position: absolute;
+    top: 0;
+}
+
+.logo {
+    width: 117px;
+    height: 122px;
+    position: absolute;
+    top: 10px;
+    left: calc(50% - 53.5px);
+}
+
+.nav-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 35px;
+    position: absolute;
+    top: 163px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+}
+
+.nav-item {
+    flex: 1;
+    max-width: 180px;
+    height: 35px;
+    padding: 10px;
+    background: #FFCC33;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 25px;
+    margin: 0 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.title {
+    position: absolute;
+    top: 220px;
+    width: 100%;
+    text-align: center;
+    color: black;
+    font-size: 40px;
+    font-weight: 700;
+    font-family: 'Neutraface Text', sans-serif;
+}
+
+.week-date {
+    position: absolute;
+    top: 290px;
+    width: 100%;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 700;
+    font-family: 'Neutraface Text', sans-serif;
+}
+
+.table-container {
+    width: 90%;
+    max-width: 1200px;
+    border: 1px solid black;
+    border-collapse: collapse;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 350px;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 400px;
+    overflow-y: auto;
+}
+
+.table {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.table-row {
+    display: flex;
+    border-bottom: 1px solid #5B5B5B;
+}
+
+.header-row {
+    background-color: #cdc9c9;
+}
+
+.table-cell, .header-cell {
+    flex: 1;
+    padding: 10px;
+    text-align: center;
+    font-size: 18px;
+    font-family: Arial, sans-serif;
+    border-left: 1px solid #5B5B5B;
+    font-family: 'Neutraface Text', sans-serif;
+}
+
+.header-cell {
+    font-weight: 600;
+    font-size: 20px;
+    font-family: 'Neutraface Text', sans-serif;
+}
+
+.table-cell:first-child, .header-cell:first-child {
+    border-left: none;
+}
+
+@media (max-width: 768px) {
+    .Header .Component {
+        max-width: 100%;
+        margin: 5px 0;
+    }
+    .table-container {
+        width: 100%;
+        height: auto;
+    }
+}
+</style>
